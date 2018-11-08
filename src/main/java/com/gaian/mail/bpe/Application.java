@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @SpringBootApplication
 @EnableScheduling
 @EnableFeignClients
+
 public class Application {
 
     public static void main(String[] args) throws Exception {
@@ -24,9 +25,8 @@ public class Application {
 
 
 
-    @FeignClient(name = "bpe", url = "http://127.0.0.1:5000/todo/api/v1.0")
+    @FeignClient(name = "bpe", url = "${bpe.url}")
     public interface BpeClient {
-
         @RequestMapping(method = RequestMethod.POST, value = "/tasks", consumes = "application/json")
         String convert(BpeRequest bpeRequest);
     }
